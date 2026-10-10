@@ -80,8 +80,9 @@ img { max-width: 100%; display: block; }
   width: 100%;
   border-radius: 28px;
   aspect-ratio: 9 / 19.5;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top center;
+  background: #eef2f8;
 }
 
 .section { padding: 100px 0; }
@@ -125,7 +126,7 @@ img { max-width: 100%; display: block; }
 .shot-card img {
   width: 100%;
   aspect-ratio: 9 / 19.5;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top center;
   background: #eef2f8;
 }
