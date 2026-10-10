@@ -125,10 +125,11 @@ img { max-width: 100%; display: block; }
 }
 .shot-card img {
   width: 100%;
-  aspect-ratio: 9 / 19.5;
+  height: auto;
+  aspect-ratio: auto;
   object-fit: contain;
   object-position: top center;
-  background: #eef2f8;
+  background: transparent;
 }
 .shot-card figcaption {
   padding: 14px 16px 16px;
