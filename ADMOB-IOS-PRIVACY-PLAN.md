@@ -91,7 +91,20 @@ Troubleshooting: https://support.google.com/admob/answer/9776740
 | SDK release archive | Confirm all privacy manifests, Info.plist keys, SDK versions and observed network/data flows |
 | App Store Connect preview | Every answer matches the audited build and published privacy policy |
 
-## 7. Still need confirmation
+## 7. Photo and scoreboard audit update
+
+A preliminary code review of an earlier La Ficha iPhone HTML build (v8.18.5) supports the owner's understanding of **on-device pip recognition**:
+
+- Selected photos are processed using browser `createImageBitmap`, canvas pixel extraction (`getImageData`), and local `analyzeCanvas` functions.
+- The browser's `getUserMedia` API captures live camera input; the camera capture workflow makes a local canvas/JPEG blob.
+- Scores, round history, team names, and language preference are persisted in browser `localStorage` with key `la-ficha-state-v1851`.
+- The indexed reviewed HTML showed no `fetch`, `XMLHttpRequest`, `WebSocket`, or `sendBeacon` references, but the final signed iOS version **has not been audited**.
+
+Under Apple's App Privacy instructions, data processed entirely on device without off-device transmission is not collected for the label. Only actual off-device data collection must be disclosed; AdMob collection remains independent. Re-audit the final Xcode app including any native networking/plugins/SDKS.
+
+**Do not declare domino photos as collected merely because a user takes a photo**, provided the final code genuinely keeps them on device. Also do not promise images are deleted immediately: inspect temporary files, caches and backups.
+
+## 8. Still need confirmation
 
 - Domino photos: on-device only vs uploaded to an API/cloud service?
 - Scores/history/preferences: local device only vs remote backup, analytics, or accounts?
