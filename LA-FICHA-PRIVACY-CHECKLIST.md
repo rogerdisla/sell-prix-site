@@ -1,7 +1,7 @@
 # La Ficha — App Privacy Release Checklist
 
 Status: **NOT READY TO PUBLISH** — October 15, 2026
-Confirmed release choice: **Live Google AdMob banner advertising in the first iOS version**. This is a product decision, not verification that the signed iOS app already includes/configures the SDK.
+Confirmed release choice: **Live Google AdMob banner advertising in the first iOS version**, with **no separate Firebase Analytics, crash-reporting, mediation, or other third-party analytics SDKs planned**. These are product decisions, not evidence of the final signed iOS binary.
 Owner: SELL PRIX LLC
 Draft policy page: `la-ficha-privacy.html` (in this GitHub draft branch only)
 Target published URL after approval: https://sellprixllc.com/la-ficha-privacy.html
@@ -11,7 +11,8 @@ Target published URL after approval: https://sellprixllc.com/la-ficha-privacy.ht
 - [ ] Identify the final iOS bundle, version, Xcode project, and any WebView/network integrations.
 - [ ] Inspect image processing: on-device vs remote API, whether images are uploaded, cached, retained, or sent to third-party providers.
 - [ ] Inspect game data and settings: memory, localStorage, IndexedDB, device storage, backups, external servers, or remote sync.
-- [ ] Verify if any user account, login, email, analytics, crash reporting, or other third-party SDKs exist.
+- [x] Confirm the plan: no separate analytics, crash-reporting, or other additional third-party SDKs in the first iOS release; only Google AdMob advertising plus Google's UMP consent SDK.
+- [ ] Inspect final Xcode archive to ensure no additional SDK, login, attribution, or remote analytics code is actually present. Check whether any other embedded libraries include data collection.
 - [ ] Verify whether native camera/photo-library permission is needed, when requested, and the explanation shown to users.
 - [ ] Identify how users erase scores, history and cached photos.
 - [ ] Confirm the app's age rating, intended audience and child-directed status.
@@ -34,7 +35,7 @@ Reviewed indexed La Ficha iPhone HTML `index(3).html`, identifiable in its title
 
 - [x] Confirm the product decision to include live Google AdMob banner ads in the first iOS release (**user confirmed; native SDK integration still pending verification**).
 - [ ] Confirm the submitted native iOS build actually integrates Google Mobile Ads SDK and the correct production AdMob app/banner-unit IDs.
-- [ ] Record the exact Google Mobile Ads SDK version, mediation adapters, analytics tools and privacy manifests included in the actual binary.
+- [ ] Record Google Mobile Ads and UMP SDK versions and privacy manifests actually included in the final binary; verify there are no extra mediation, analytics, crash-reporting, or attribution SDKs.
 - [ ] Use Google's iOS data-disclosure documentation to identify applicable data (potentially IP-derived location, identifiers, diagnostics, ad data, usage interactions).
 - [ ] Determine whether any data is linked to a user and whether any activity qualifies as tracking under Apple's definition; do not assume "non-personalized" means "no data collected".
 - [ ] Determine if App Tracking Transparency (ATT) is required by the app's actual tracking behavior. Include a usage description if requesting tracking authorization.
@@ -77,7 +78,7 @@ Resources:
 1. **CONFIRMED:** Live AdMob banners are planned for the first iOS App Store build; actual iOS SDK integration must still be verified.
 2. Are domino photos processed completely on-device or passed to any remote API?
 3. Are team scores and history stored only on the device, and does the app have any logins/remote sync?
-4. Will other SDKs (Firebase, analytics, crash reports) be integrated?
+4. **CONFIRMED PRODUCT PLAN:** No separate Firebase Analytics, crash-reporting, or mediation SDKs for initial release. **VERIFY actual signed iOS binary.**
 5. What is the app's intended age group / proposed App Store age rating?
 
 Do not represent unverified items as facts or choose "No data collected" until the first-release code and all advertising SDK data flows are audited.
