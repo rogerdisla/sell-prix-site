@@ -160,6 +160,35 @@ img { max-width: 100%; display: block; }
   color: #334055;
 }
 
+/* Match the homepage iPhone mockup on all three La Ficha gallery screenshots. */
+.shot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 12px 0;
+  min-width: 0;
+}
+.shot-phone.phone-shell {
+  width: min(100%, 270px);
+  padding: 5px;
+  border-width: 3px;
+  border-radius: 39px;
+  box-shadow: 0 16px 36px rgba(11, 18, 32, .18);
+  flex: 0 0 auto;
+}
+.shot-phone .phone-top {
+  top: 5px;
+  height: 17px;
+  border-radius: 0 0 12px 12px;
+}
+.shot-phone .phone-screen {
+  border-radius: 31px;
+}
+.shot-card figcaption {
+  width: 100%;
+  text-align: center;
+}
+
 .cards { margin-top: 42px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .info-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 27px; }
 .card-number { font-size: 12px; font-weight: 850; color: var(--blue); }
