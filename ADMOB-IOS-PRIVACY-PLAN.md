@@ -2,7 +2,7 @@
 
 **Status:** Planning document only — **not a verified iOS implementation** (October 15, 2026)
 **Publisher:** SELL PRIX LLC
-**Product decision:** Launch the first iOS release with **live Google AdMob banner ads**.
+**Product decision:** Launch the first iOS release with **live Google AdMob banner ads**, using **Google UMP for advertising privacy choices**, and **no separate Firebase Analytics, crash-reporting, additional ad mediation or other analytics SDKs**. Actual SDK composition remains subject to final iOS-binary verification.
 **Privacy-policy draft:** `la-ficha-privacy.html` on this unpublished GitHub branch.
 
 ## 1. Recommended launch configuration
@@ -10,7 +10,7 @@
 - Ads: Google AdMob banner units. Use the native Google Mobile Ads SDK, not only a placeholder ad region in the HTML/PWA.
 - Privacy approach: use non-personalized/contextual ads where legally appropriate and technically available as a simple starting strategy. This does **not** mean no data is collected.
 - Integrate Google User Messaging Platform (UMP) in the native iOS shell. It is a consent tool, **not** a substitute for Apple's App Tracking Transparency (ATT) permission or App Store privacy declarations.
-- Start with Google-only ads if practical; if mediation networks are added later, update privacy disclosures and check every network's SDK behavior and manifests.
+- **Use Google AdMob only at launch (confirmed)**: no separate analytics or crash-reporting SDKs and no third-party mediation network SDKs planned. If any SDK is later added, re-audit the app, consent configuration and App Store privacy label.
 - Do not knowingly send domino tile images or game scores to advertising networks. Review SDK behavior for actual data transfer.
 
 ## 2. Before Xcode/App Store release
@@ -108,7 +108,7 @@ Under Apple's App Privacy instructions, data processed entirely on device withou
 
 - Domino photos: on-device only vs uploaded to an API/cloud service?
 - Scores/history/preferences: local device only vs remote backup, analytics, or accounts?
-- Other SDKs in first release: Firebase, crash analytics, attribution, mediation?
+- Other SDKs in first release: **no separate Firebase Analytics/crash reporting/mediation planned (confirmed)**; verify the final signed Xcode build contains only intended integrations.
 - Intended audience: general/teen/adult; is any child-directed advertising configuration required?
 - Obtain real AdMob publisher line for app-ads.txt (not the full account password/secret).
 - Verify final iOS/Xcode build; the GitHub repository currently contains a single oversized HTML source and no native Xcode source to audit.
