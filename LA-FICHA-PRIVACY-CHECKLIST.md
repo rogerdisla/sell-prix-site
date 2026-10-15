@@ -18,6 +18,18 @@ Target published URL after approval: https://sellprixllc.com/la-ficha-privacy.ht
 
 Note: The La Ficha repository currently exposes an approximately 14 MB `index.html` file and no native iOS/Xcode project. The available GitHub connector could not return this file's content for a full data-flow audit. This checklist deliberately does not certify app behavior.
 
+## A1. Source-code audit findings (preliminary, not release validation)
+
+Reviewed indexed La Ficha iPhone HTML `index(3).html`, identifiable in its title as **v8.18.5 iOS 27 Blur Fix**. This is NOT the signed iOS build or the locked v8.18.8 release baseline.
+
+- **Local photo recognition observed:** `handleFile(file)` calls `createImageBitmap(file)`, draws it to a canvas, and runs `analyzeCanvas(c)` using `getImageData(...)` and in-page image processing. Live camera obtains video frames using `navigator.mediaDevices.getUserMedia` and copies a captured frame to a canvas.
+- **No photo-transfer mechanism identified in this reviewed HTML:** searches for `fetch(`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, and outbound URL literals returned no matches in the text index. Absence of these calls in this reviewed file is not definitive proof about the final compiled Xcode app, SDK internals, custom URL scheme handlers, or network use at runtime.
+- **Local scoreboard storage observed:** JavaScript uses `localStorage.setItem('la-ficha-state-v1851', JSON.stringify({state,nameA,nameB}))`. State includes team score totals, rounds, target score, detected total, and language preference. The code reads it with `localStorage.getItem`.
+- **No image persistence confirmed:** The reviewed code uses image previews/canvas and locally generated JPEG Blobs, but file-system, cache, iOS Photos-library behavior, and backups still require a final-build review.
+- **Preliminary disclosure implication:** Domino photos, rounds, and preferences **need not be marked as Apple-collected** if the final app keeps their processing and storage entirely on the device and does not transmit them or derived data to the developer/third parties. AdMob's own applicable data collection MUST be disclosed separately. Never use the preliminary findings to claim `No Data Collected`.
+
+**Verification gate still open:** Inspect the locked version used for the actual App Store build and the signed iOS release archive; run an instrumented capture/upload test (e.g., Xcode network diagnostics), review SDKs, and confirm no image or scores leave the device.
+
 ## B. AdMob decisions — complete before answering Apple's questions
 
 - [x] Confirm the product decision to include live Google AdMob banner ads in the first iOS release (**user confirmed; native SDK integration still pending verification**).
