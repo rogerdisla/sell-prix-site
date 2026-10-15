@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Internal review draft of the La Ficha app privacy policy. Not yet finalized or approved for publication.">
+  <title>La Ficha App Privacy — Internal Review Draft | SELL PRIX LLC</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css?v=2026-refresh-1">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="SELL PRIX LLC home"><span class="brand-mark">SP</span><span>SELL PRIX LLC</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation">
+        <a href="index.html#about">About</a><a href="la-ficha.html">La Ficha</a><a href="support.html">Support</a><a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container content-narrow">
+        <p class="eyebrow">Internal review draft — not for publication</p>
+        <h1>La Ficha App Privacy Policy</h1>
+        <p>This is a working draft for SELL PRIX LLC. The final policy must describe the actual released app and its advertising SDK configuration.</p>
+      </div>
+    </section>
+    <section class="content-page">
+      <div class="container content-narrow">
+        <p class="meta"><strong>Status:</strong> Draft prepared October 15, 2026. <strong>Effective date:</strong> To be assigned after final verification.</p>
+        <p><strong>IMPORTANT:</strong> The bracketed review items below must be resolved before this page becomes public or is entered in App Store Connect. This is not a finalized legal notice.</p>
+
+        <h2>1. About La Ficha</h2>
+        <p>La Ficha is a dominoes scorekeeping app developed by SELL PRIX LLC. It includes team scoring, camera-assisted pip counting, and interface language options. [VERIFY the features and platforms in the final submitted build.]</p>
+
+        <h2>2. Photos and camera permissions</h2>
+        <p>La Ficha provides camera-assisted counting of domino tiles and allows users to choose an image for analysis. The reviewed iPhone web implementation decodes selected photos on the device and analyzes their image pixels locally using the browser's canvas tools. It does not require sending domino photographs to SELL PRIX LLC to count pips. Users can also enter scores manually.</p>
+        <p>The reviewed image-processing workflow uses the selected photo in memory and on a local preview canvas. No photo transmission or server-side recognition code was identified in the examined web build.</p>
+        <p><strong>[VERIFY BEFORE PUBLICATION]</strong> Confirm these findings in the final, signed iOS build (including any WebView wrapper, native plugins, and third-party SDKs). Verify whether the app saves images to its local files, Photos library, or temporary caches, how such content is erased, and that photo files are not transferred to advertising or analytics providers. The analyzed HTML version was not the final native build.</p>
+
+        <h2>3. Game scores and preferences</h2>
+        <p>La Ficha keeps track of team scores, round history, the selected target score, team names, and interface language preferences. In the reviewed iPhone web implementation, these settings are saved in the device's browser local storage, using the key <code>la-ficha-state-v1851</code>. No corresponding cloud synchronization or remote scoring endpoint was identified in that examined build.</p>
+        <p><strong>[VERIFY BEFORE PUBLICATION]</strong> Confirm final native-app storage, iOS backup behavior, whether any analytics SDK receives game-state data, and how users can clear saved scores and team names. Local storage can persist between sessions and may be erased when app/site data is cleared; do not promise automatic deletion until verified.</p>
+
+        <h2>4. Advertising and third-party services</h2>
+        <p>SELL PRIX LLC plans to include live Google AdMob banner advertising in the first iOS release of La Ficha. Banner advertisements will be served using the Google Mobile Ads SDK. Google and participating advertising partners may process information including IP addresses (which can indicate general location), device or app identifiers, ad views and interactions, performance and diagnostic information, and app interactions, depending on the final SDK setup, available permissions, user choices, and ad serving configuration.</p>
+        <p>Advertising data may be used for displaying advertisements, measuring their performance, analytics, fraud prevention, and—only when permitted—personalization. Ad-related information is processed by Google and potentially advertising partners. For details on Google's practices, see <a class="text-link" href="https://policies.google.com/privacy">Google's Privacy Policy</a> and <a class="text-link" href="https://developers.google.com/admob/ios/privacy/data-disclosure">Google's SDK data disclosure guidance</a>.</p>
+        <p>For the initial iOS release, SELL PRIX LLC plans to use Google AdMob for banner ads and Google's User Messaging Platform (UMP) for advertising privacy messages. No separate Firebase Analytics, third-party crash-reporting SDK, or additional ad-network mediation SDK is planned. Google Mobile Ads may still collect diagnostics or usage information as part of its own operation; not installing separate analytics or crash-reporting tools does not mean there is no collection.</p>
+        <p><strong>[VERIFY BEFORE PUBLICATION]</strong> Inspect the signed iOS release build to confirm the Google Mobile Ads and UMP SDKs, check that there are no additional analytics, crash-reporting, mediation, attribution or other data-collecting SDKs, and document the actual data categories, purposes, linked-data treatment, tracking behavior and third-party disclosures. The policy must match the final integrated build, not just this plan.</p>
+
+        <h2>5. Consent and privacy controls</h2>
+        <p>Users can manage camera permission in device settings. To address advertising privacy choices, the planned iOS integration will use Google's User Messaging Platform (UMP) where applicable to present regulatory consent choices, including the ability to revisit those choices using a visible in-app privacy settings option when required.</p>
+        <p>Apple's App Tracking Transparency (ATT) authorization must be requested if the final app performs cross-app or cross-website tracking within Apple's definition. Declining tracking permission does not itself prevent all advertising or other non-tracking data processing; applicable advertising and privacy settings will control what is permitted.</p>
+        <p><strong>[VERIFY BEFORE PUBLICATION]</strong> Confirm UMP, relevant consent messages, the privacy-options entry point, and—if applicable—ATT are actually implemented and tested. Replace planned-language statements with precise instructions for accessing settings once verified.</p>
+
+        <h2>6. Retention and deletion</h2>
+        <p>[VERIFY the retention period for each category of data, the process for deleting locally stored game data, whether uninstalling removes it, and any separate retention by advertising providers. Explain how to request deletion of information held by SELL PRIX LLC, if applicable.]</p>
+
+        <h2>7. Children's privacy</h2>
+        <p>[VERIFY the app's intended audience and age rating, whether it is directed to children, whether advertising is child-directed or restricted, and any applicable parental or minor-user privacy requirements.]</p>
+
+        <h2>8. Security and international processing</h2>
+        <p>[VERIFY security and storage practices and whether data is transferred internationally by SELL PRIX LLC or integrated service providers. Do not promise encryption or protections without confirming them.]</p>
+
+        <h2>9. Changes to this policy</h2>
+        <p>The final policy will include an effective date and may be updated to reflect changes to La Ficha or its service providers. App Store privacy declarations should be updated whenever relevant collection practices change.</p>
+
+        <h2>10. Contact</h2>
+        <p>For privacy questions concerning La Ficha, contact SELL PRIX LLC at <a class="text-link" href="mailto:support@sellprixllc.com">support@sellprixllc.com</a>.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><a class="brand footer-brand" href="index.html"><span class="brand-mark">SP</span><span>SELL PRIX LLC</span></a><p>Mobile software &amp; digital products.</p></div>
+      <div class="footer-links"><a href="la-ficha.html">La Ficha</a><a href="support.html">Support</a><a href="privacy.html">Website Privacy</a><a href="terms.html">Terms</a></div>
+    </div>
+    <div class="container copyright">© 2026 SELL PRIX LLC. All rights reserved.</div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
