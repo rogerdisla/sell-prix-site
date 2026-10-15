@@ -1,6 +1,7 @@
 # La Ficha — App Privacy Release Checklist
 
 Status: **NOT READY TO PUBLISH** — October 15, 2026
+Confirmed release choice: **Live Google AdMob banner advertising in the first iOS version**. This is a product decision, not verification that the signed iOS app already includes/configures the SDK.
 Owner: SELL PRIX LLC
 Draft policy page: `la-ficha-privacy.html` (in this GitHub draft branch only)
 Target published URL after approval: https://sellprixllc.com/la-ficha-privacy.html
@@ -19,14 +20,21 @@ Note: The La Ficha repository currently exposes an approximately 14 MB `index.ht
 
 ## B. AdMob decisions — complete before answering Apple's questions
 
-- [ ] Confirm whether the first submitted iOS build includes **live Google AdMob SDK**, test ads only, or no advertising code.
+- [x] Confirm the product decision to include live Google AdMob banner ads in the first iOS release (**user confirmed; native SDK integration still pending verification**).
+- [ ] Confirm the submitted native iOS build actually integrates Google Mobile Ads SDK and the correct production AdMob app/banner-unit IDs.
 - [ ] Record the exact Google Mobile Ads SDK version, mediation adapters, analytics tools and privacy manifests included in the actual binary.
 - [ ] Use Google's iOS data-disclosure documentation to identify applicable data (potentially IP-derived location, identifiers, diagnostics, ad data, usage interactions).
 - [ ] Determine whether any data is linked to a user and whether any activity qualifies as tracking under Apple's definition; do not assume "non-personalized" means "no data collected".
 - [ ] Determine if App Tracking Transparency (ATT) is required by the app's actual tracking behavior. Include a usage description if requesting tracking authorization.
-- [ ] Configure consent messaging through Google UMP / an applicable certified CMP where required. Provide an in-app privacy-options entry point when required.
+- [ ] Create required AdMob Privacy & messaging consent messages in the AdMob dashboard (including applicable EEA/UK/Switzerland and US-state choices).
+- [ ] Integrate Google UMP in the native iOS code, request consent update every launch, and load/present forms as required.
+- [ ] Gate banner requests using UMP's `canRequestAds`, with safeguards against duplicate requests; provide an in-app privacy-options entry point whenever UMP says one is required.
 - [ ] Review geographic requirements (for example EEA/UK and applicable US state privacy controls).
 - [ ] Decide whether a user privacy-choices web page is helpful; Apple's Privacy Choices URL is optional, distinct from in-app consent mechanisms.
+- [ ] Audit the Google SDK privacy manifest, privacy report, and required-reason APIs; review any mediation partners and their manifests.
+- [ ] Verify Info.plist: `GADApplicationIdentifier`, applicable camera/photo access messages, ATT usage message only if ATT is requested, and Google's current SKAdNetwork IDs.
+- [ ] During development, use AdMob test ad units or test device configuration to avoid invalid traffic; enable production IDs only for compliant release testing/use.
+- [ ] Add authorized seller `app-ads.txt` at https://sellprixllc.com/app-ads.txt using the exact line supplied by the connected AdMob account (do not invent publisher ID). Link https://sellprixllc.com/ as the App Store Developer Website / marketing URL and allow verification time.
 
 Resources:
 - Apple app privacy: https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy
@@ -54,10 +62,12 @@ Resources:
 
 ## E. Unresolved questions for app developer
 
-1. Will live AdMob banners be included in the **first iOS App Store build**?
+1. **CONFIRMED:** Live AdMob banners are planned for the first iOS App Store build; actual iOS SDK integration must still be verified.
 2. Are domino photos processed completely on-device or passed to any remote API?
 3. Are team scores and history stored only on the device, and does the app have any logins/remote sync?
 4. Will other SDKs (Firebase, analytics, crash reports) be integrated?
 5. What is the app's intended age group / proposed App Store age rating?
 
-Do not represent these five open items as facts or choose "No data collected" until the first-release code is audited.
+Do not represent unverified items as facts or choose "No data collected" until the first-release code and all advertising SDK data flows are audited.
+
+**Working disclosure direction:** Since live Google Mobile Ads is planned, prepare to answer **Yes, data is collected** and examine Apple's relevant data types individually: coarse location (IP-derived), device ID, crash/performance/other diagnostic data, advertising data, and product interaction data. Each actual type requires purpose, linking, and tracking determinations based on final SDK configuration. Do not publish speculative checkboxes.
